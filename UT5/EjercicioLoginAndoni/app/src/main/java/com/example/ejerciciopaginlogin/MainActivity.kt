@@ -3,7 +3,11 @@ package com.example.ejerciciopaginlogin
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import com.example.ejerciciopaginlogin.ui.model.LoginStructure
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.ejerciciopaginlogin.ui.model.HomeScreen
+import com.example.ejerciciopaginlogin.ui.model.SignInScreen
 import com.example.ejerciciopaginlogin.ui.theme.EjercicioPaginLoginTheme
 
 class MainActivity : ComponentActivity() {
@@ -12,7 +16,11 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             EjercicioPaginLoginTheme {
-                LoginStructure()
+                val navController = rememberNavController()
+                NavHost(navController = navController, startDestination = "signin") {
+                    composable("signin") { SignInScreen(navController) }
+                    composable("home") { HomeScreen(navController) }
+                }
             }
         }
     }
